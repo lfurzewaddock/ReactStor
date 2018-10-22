@@ -52,6 +52,7 @@ module.exports = merge(config, {
   devServer: {
     hot: true,
     contentBase: path.join(__dirname, "../dist"),
+    historyApiFallback: true, // server support React Router v4: https://tylermcginnis.com/react-router-cannot-get-url-refresh/
     overlay: {
       errors: true,
       warnings: true,
@@ -112,4 +113,7 @@ module.exports = merge(config, {
     ],
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
+  output: {
+    publicPath: "/", // server support React Router v4: https://tylermcginnis.com/react-router-cannot-get-url-refresh/
+  },
 });
