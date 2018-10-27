@@ -1,6 +1,8 @@
 import React from "react";
 
-// import imgPlaceholder300x300white from "../../../../../assets/images/placeholder-300x300-white.png";
+// TODO: Fix tests with loading images
+// import imgPlaceholder300x300white from
+// "../../../../../assets/images/placeholder-300x300-white.png";
 
 import styles from "./category.module.css";
 
