@@ -15,6 +15,8 @@
   "plugins": [
     "add-module-exports",
     "@babel/plugin-transform-modules-umd",
-    "@babel/plugin-proposal-class-properties"
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-transform-async-to-generator",
+    "@babel/plugin-transform-runtime"
   ]
 }
