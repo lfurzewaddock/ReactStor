@@ -13,3 +13,9 @@ dist
 
 # Apple MAC hidden files
 .DS_Store
+
+# old/redundant files waiting to be deleted
+*.ARCHIVE.*
+
+# temporary files
+*.tmp
