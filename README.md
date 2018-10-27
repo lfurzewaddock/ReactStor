@@ -30,3 +30,12 @@ Work in progress.
 
 - Download/install [js-tdd-kit](https://github.com/lfurzewaddock/js-tdd-kit)
 
+
+## Conventions
+
+- File Names : [Airbnb React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react#naming)
+
+
+## Assets
+
+- [Dynamic Dummy Image Generator](https://dummyimage.com/300x300/fff/aaa)

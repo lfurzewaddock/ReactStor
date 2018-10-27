@@ -12,6 +12,7 @@
     "testem": "node_modules/.bin/testem -f testem.node.json",
     "testIntegration": "NODE_ENV=development node_modules/.bin/tape --require @babel/register --require mock-css-modules --require jsdom-global/register test/jsdom.environment.js test/integration/{,**/}/*.test.js | node_modules/.bin/tap-spec",
     "debug": "NODE_ENV=debug node --nolazy --inspect-brk=5858 node_modules/.bin/tape --require @babel/register --require mock-css-modules test/jsdom.environment.js test/unit/{,**/}/*.test.js",
+    "debugIntegration": "NODE_ENV=debug node --nolazy --inspect-brk=5858 node_modules/.bin/tape --require @babel/register --require mock-css-modules --require jsdom-global/register test/jsdom.environment.js test/integration/{,**/}/*.test.js",
     "devBuild": "node_modules/.bin/webpack --mode development --config webpack/dev",
     "devWatch": "npm run devBuild -- --watch",
     "devStart": "node_modules/.bin/webpack-dev-server --mode development --config webpack/dev --open",
@@ -89,6 +90,7 @@
     "style-loader": "^0.23.1",
     "tap-spec": "^5.0.0",
     "tape": "^4.9.1",
+    "testdouble": "^3.8.2",
     "testem": "^2.13.0",
     "url-loader": "^1.1.2",
     "webpack": "^4.21.0",
@@ -98,7 +100,9 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
+    "prop-types": "^15.6.2",
     "react": "^16.5.2",
-    "react-dom": "^16.5.2"
+    "react-dom": "^16.5.2",
+    "react-router-dom": "^4.3.1"
   }
 }

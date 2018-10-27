@@ -1,29 +1,22 @@
 // import "jsdom-global/register";
 import test from "tape";
 import React from "react";
-import { mount } from "enzyme";
+import ReactDOM from "react-dom";
 
 import "../../../enzyme-setup";
 
-import index from "../../../../src/ui/store-front/index";
+import Routes from "../../../../src/ui/store-front/routes";
 
-test("index.js", (t) => {
-  t.test("mount", (assert) => {
-    // TODO: Is this pointless? - delete if proved unnecessary
+const routes = <Routes />;
 
-    // var root = global.document.createElement("div");
-    // root.setAttribute("id", "root");
-    // global.document.body.appendChild(root);
-    // console.log("body: ", global.document.body.innerHTML);
+test("store-front/index.js", (t) => {
+  t.test("App renders", (assert) => {
+    const div = document.createElement("div");
 
-    const wrapper = mount(<index />);
+    ReactDOM.render(routes, div);
+    ReactDOM.unmountComponentAtNode(div);
 
-    const message = "should render an index component'";
-    const actual = wrapper.contains(<index />);
-    // const actual = wrapper.html();
-    const expected = true;
-
-    assert.equal(actual, expected, message);
+    assert.pass("without crashing");
     assert.end();
   });
 });

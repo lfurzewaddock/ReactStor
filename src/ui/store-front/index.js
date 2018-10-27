@@ -1,9 +1,10 @@
-
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+
+import Routes from "./routes";
+
 import "./index.css";
 
-const app = <App />;
+const routes = <Routes />;
 
-ReactDOM.render(app, document.getElementById("root") || document.createElement("div"));
+ReactDOM.render(routes, document.getElementById("root") || document.createElement("div"));
