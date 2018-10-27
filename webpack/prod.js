@@ -74,72 +74,111 @@ module.exports = merge(config, {
       // START Source: Create React App
       // https://github.com/facebook/create-react-app/packages/react-scripts/config/webpack.config.prod.js
 
-      // "postcss" loader applies autoprefixer to our CSS.
-      // "css" loader resolves paths in CSS and adds assets as dependencies.
-      // `MiniCSSExtractPlugin` extracts styles into CSS
-      // files. If you use code splitting,
-      // async bundles will have their own separate CSS chunk file.
-      // By default we support CSS Modules with the extension .module.css
       {
-        test: vars.cssRegex,
-        exclude: vars.cssModuleRegex,
-        loader: getStyleLoaders({
-          importLoaders: 1,
-          sourceMap: shouldUseSourceMap,
-        }),
-        // Don't consider CSS imports dead code even if the
-        // containing package claims to have no side effects.
-        // Remove this when webpack adds a warning or an error for this.
-        // See https://github.com/webpack/webpack/issues/6571
-        sideEffects: true,
-      },
-      // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
-      // using the extension .module.css
-      {
-        test: vars.cssModuleRegex,
-        loader: getStyleLoaders({
-          importLoaders: 1,
-          sourceMap: shouldUseSourceMap,
-          modules: true,
-          getLocalIdent: getCSSModuleLocalIdent,
-        }),
-      },
-      // Opt-in support for SASS. The logic here is somewhat similar
-      // as in the CSS routine, except that "sass-loader" runs first
-      // to compile SASS files into CSS.
-      // By default we support SASS Modules with the
-      // extensions .module.scss or .module.sass
-      {
-        test: vars.sassRegex,
-        exclude: vars.sassModuleRegex,
-        loader: getStyleLoaders(
+        // "oneOf" will traverse all following loaders until one will
+        // match the requirements. When no loader matches it will fall
+        // back to the "file" loader at the end of the loader list.
+        oneOf: [
+          // "url" loader works just like "file" loader but it also embeds
+          // assets smaller than specified size as data URLs to avoid requests.
           {
-            importLoaders: 2,
-            sourceMap: shouldUseSourceMap,
+            test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+            loader: require.resolve("url-loader"),
+            options: {
+              limit: 10000,
+              name: "static/media/[name].[hash:8].[ext]",
+            },
           },
-          "sass-loader",
-        ),
-        // Don't consider CSS imports dead code even if the
-        // containing package claims to have no side effects.
-        // Remove this when webpack adds a warning or an error for this.
-        // See https://github.com/webpack/webpack/issues/6571
-        sideEffects: true,
-      },
-      // Adds support for CSS Modules, but using SASS
-      // using the extension .module.scss or .module.sass
-      {
-        test: vars.sassModuleRegex,
-        loader: getStyleLoaders(
+          // START Source: Create React App
+          // https://github.com/facebook/create-react-app/packages/react-scripts/config/webpack.config.prod.js
+
+          // "postcss" loader applies autoprefixer to our CSS.
+          // "css" loader resolves paths in CSS and adds assets as dependencies.
+          // `MiniCSSExtractPlugin` extracts styles into CSS
+          // files. If you use code splitting,
+          // async bundles will have their own separate CSS chunk file.
+          // By default we support CSS Modules with the extension .module.css
           {
-            importLoaders: 2,
-            sourceMap: shouldUseSourceMap,
-            modules: true,
-            getLocalIdent: getCSSModuleLocalIdent,
+            test: vars.cssRegex,
+            exclude: vars.cssModuleRegex,
+            loader: getStyleLoaders({
+              importLoaders: 1,
+              sourceMap: shouldUseSourceMap,
+            }),
+            // Don't consider CSS imports dead code even if the
+            // containing package claims to have no side effects.
+            // Remove this when webpack adds a warning or an error for this.
+            // See https://github.com/webpack/webpack/issues/6571
+            sideEffects: true,
           },
-          "sass-loader",
-        ),
+          // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
+          // using the extension .module.css
+          {
+            test: vars.cssModuleRegex,
+            loader: getStyleLoaders({
+              importLoaders: 1,
+              sourceMap: shouldUseSourceMap,
+              modules: true,
+              getLocalIdent: getCSSModuleLocalIdent,
+            }),
+          },
+          // Opt-in support for SASS. The logic here is somewhat similar
+          // as in the CSS routine, except that "sass-loader" runs first
+          // to compile SASS files into CSS.
+          // By default we support SASS Modules with the
+          // extensions .module.scss or .module.sass
+          {
+            test: vars.sassRegex,
+            exclude: vars.sassModuleRegex,
+            loader: getStyleLoaders(
+              {
+                importLoaders: 2,
+                sourceMap: shouldUseSourceMap,
+              },
+              "sass-loader",
+            ),
+            // Don't consider CSS imports dead code even if the
+            // containing package claims to have no side effects.
+            // Remove this when webpack adds a warning or an error for this.
+            // See https://github.com/webpack/webpack/issues/6571
+            sideEffects: true,
+          },
+          // Adds support for CSS Modules, but using SASS
+          // using the extension .module.scss or .module.sass
+          {
+            test: vars.sassModuleRegex,
+            loader: getStyleLoaders(
+              {
+                importLoaders: 2,
+                sourceMap: shouldUseSourceMap,
+                modules: true,
+                getLocalIdent: getCSSModuleLocalIdent,
+              },
+              "sass-loader",
+            ),
+          },
+          // END Source: Create React App
+
+          // // "file" loader makes sure assets end up in the `build` folder.
+          // // When you `import` an asset, you get its filename.
+          // // This loader doesn't use a "test" so it will catch all modules
+          // // that fall through the other loaders.
+          // {
+          //   loader: require.resolve("file-loader"),
+          //   // Exclude `js` files to keep "css" loader working as it injects
+          //   // it's runtime that would otherwise be processed through "file" loader.
+          //   // Also exclude `html` and `json` extensions so they get processed
+          //   // by webpacks internal loaders.
+          //   exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
+          //   options: {
+          //     name: "static/media/[name].[hash:8].[ext]",
+          //   },
+          // },
+          // ** STOP ** Are you adding a new loader?
+          // Make sure to add the new loader(s) before the "file" loader.
+        ],
       },
-      // END Source: Create React App
+    // END Source: Create React App
     ],
   },
   plugins: [
