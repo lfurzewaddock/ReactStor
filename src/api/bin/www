@@ -1,0 +1,93 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var debug = require("debug")("api:server");
+var http = require("http");
+var app = require("../app");
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || "3000");
+
+/**
+ * Create HTTP server.
+ */
+var server = http.createServer(app.set("port", port));
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on("error", onError);
+server.on("listening", onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var checkPort = parseInt(val, 10);
+
+  if (Number.isNaN(checkPort)) {
+    // named pipe
+    return val;
+  }
+
+  // IE Polyfill
+  Number.isNaN = Number.isNaN || function isNaN(value) {
+    return value !== value; /* eslint-disable-line no-self-compare */
+  };
+
+  if (checkPort >= 0) {
+    // port number
+    return checkPort;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  var bind = typeof port === "string"
+    ? `Pipe ${port}`
+    : `Port ${port}`;
+
+  if (error.syscall !== "listen") {
+    throw error;
+  }
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case "EACCES":
+      console.error(`${bind} requires elevated privileges`); /* eslint-disable-line no-console */
+      process.exit(1);
+      break;
+    case "EADDRINUSE":
+      console.error(`${bind} is already in use`); /* eslint-disable-line no-console */
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === "string"
+    ? `pipe ${addr}`
+    : `port ${addr.port}`;
+  debug(`Listening on ${bind}`);
+}
