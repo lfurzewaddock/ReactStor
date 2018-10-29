@@ -9,13 +9,13 @@ var http = require("http");
 var app = require("../app");
 
 /**
- * Get port from environment and store in Express.
+ * Get port from environment.
  */
 
 var port = normalizePort(process.env.PORT || "3000");
 
 /**
- * Create HTTP server.
+ * Create HTTP server and and store port in Express
  */
 var server = http.createServer(app.set("port", port));
 
