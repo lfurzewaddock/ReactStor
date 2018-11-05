@@ -1,15 +1,31 @@
 /* Extra small devices (portrait phones, less than 576px) */
 /* No media query for `xs` since this is the default in Bootstrap */
-.Categories {
-  text-transform: uppercase;
-  font-weight: bold;
-  color: violet;
+
+ ul.NavigationItems {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  align-items: start;
+  height: 100%;
 }
+
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {}
 
 /* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {}
+@media (min-width: 768px) {
+  ul.NavigationItems {
+    flex-flow: row;
+    flex-wrap: wrap;
+  }
+  ul.NavigationItems li {
+    flex: 1 0 auto;
+    text-align: center;
+  }
+}
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {}

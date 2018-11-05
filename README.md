@@ -2,7 +2,12 @@
 
 This is probably the most complicated 'Hello World' app in the world!
 
-Work in progress.
+Work in progress...
+
+## Features: 
+
+- Core navigation UI (responsive)
+- Okta OIDC (implicit flow) client integration
 
 ## Commands
 
@@ -34,8 +39,13 @@ Work in progress.
 ## Conventions
 
 - File Names : [Airbnb React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react#naming)
+- Folder Structure [How to Organize React Files Before It’s Messed Up](https://engineering.opsgenie.com/how-to-organize-react-files-before-its-messed-up-c85387f691be?gi=9ede35dbc980)
 
 
 ## Assets
 
 - [Dynamic Dummy Image Generator](https://dummyimage.com/300x300/fff/aaa)
+
+## Services
+
+- [Okta Developer](https://developer.okta.com/code/react/)

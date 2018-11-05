@@ -1,0 +1,48 @@
+/* Extra small devices (portrait phones, less than 576px) */
+/* No media query for `xs` since this is the default in Bootstrap */
+.NavLinkItem {
+  width: 100%;
+} 
+.NavLinkItem a {
+  padding: 10px 0;
+  color: #fff;
+  text-decoration: none;
+  width: 100%;
+  display: block;
+}
+.NavLinkItem a {
+  height: 100%;
+  padding: 16px 10px;
+  border-left: 4px solid transparent;
+}
+.NavLinkItem a:hover,
+.NavLinkItem a:active,
+.NavLinkItem a.active {
+  background-color: #1E2424;
+  border-left: 4px solid #cc9e35;
+}
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+  .NavLinkItem {
+    width: auto;
+  } 
+  .NavLinkItem a {
+    border-left: none;
+    border-bottom: 4px solid transparent;
+  }
+  .NavLinkItem a:hover,
+  .NavLinkItem a:active,
+  .NavLinkItem a.active {
+    border-left: none;
+    border-bottom: 4px solid #cc9e35;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}

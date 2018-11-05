@@ -1,0 +1,57 @@
+/* Extra small devices (portrait phones, less than 576px) */
+/* No media query for `xs` since this is the default in Bootstrap */
+.NavButtonItem {
+  width: 100%;
+} 
+.NavButtonItem button {
+  /* start make button appear as a hyperlink */
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: inherit;
+  /* end make button appear as a hyperlink */
+  text-align: left;
+  width: 100%;
+  color: #fff;
+  padding: 10px 0;
+}
+.NavButtonItem button {
+  height: 100%;
+  padding: 16px 10px;
+  border-left: 4px solid transparent;
+}
+.NavButtonItem button:hover,
+.NavButtonItem button:active,
+.NavButtonItem button.active {
+  background-color: #1E2424;
+  border-left: 4px solid #cc9e35;
+  cursor: pointer;
+}
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .NavButtonItem {
+    width: auto;
+  }
+  .NavButtonItem button {
+    text-align: center;
+  }
+  .NavButtonItem button {
+    border-left: none;
+    border-bottom: 4px solid transparent;
+  }
+  .NavButtonItem button:hover,
+  .NavButtonItem button:active,
+  .NavButtonItem button.active {
+    border-left: none;
+    border-bottom: 4px solid #cc9e35;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}

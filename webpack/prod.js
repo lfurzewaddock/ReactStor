@@ -91,6 +91,7 @@ module.exports = merge(config, {
           },
           // START Source: Create React App
           // https://github.com/facebook/create-react-app/packages/react-scripts/config/webpack.config.prod.js
+          // Custom - Support camelCase in CSS loader
 
           // "postcss" loader applies autoprefixer to our CSS.
           // "css" loader resolves paths in CSS and adds assets as dependencies.
@@ -103,6 +104,7 @@ module.exports = merge(config, {
             exclude: vars.cssModuleRegex,
             loader: getStyleLoaders({
               importLoaders: 1,
+              camelCase: true,
               sourceMap: shouldUseSourceMap,
             }),
             // Don't consider CSS imports dead code even if the
@@ -119,6 +121,7 @@ module.exports = merge(config, {
               importLoaders: 1,
               sourceMap: shouldUseSourceMap,
               modules: true,
+              camelCase: true,
               getLocalIdent: getCSSModuleLocalIdent,
             }),
           },
@@ -192,4 +195,7 @@ module.exports = merge(config, {
     }),
     // END Source: Create React App
   ],
+  output: {
+    publicPath: "/", // server support React Router v4: https://tylermcginnis.com/react-router-cannot-get-url-refresh/
+  },
 });

@@ -6,3 +6,9 @@ node_modules/*
 
 # temporary files
 *.tmp
+
+# private notes
+notes/*
+
+# old/redundant files waiting to be deleted
+*.ARCHIVE.*

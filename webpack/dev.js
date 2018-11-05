@@ -82,6 +82,7 @@ module.exports = merge(config, {
 
           // START Source: Create React App
           // https://github.com/facebook/create-react-app/packages/react-scripts/config/webpack.config.dev.js
+          // Custom - Support camelCase in CSS loader
 
           // "postcss" loader applies autoprefixer to our CSS.
           // "css" loader resolves paths in CSS and adds assets as dependencies.
@@ -94,6 +95,7 @@ module.exports = merge(config, {
             exclude: vars.cssModuleRegex,
             use: getStyleLoaders({
               importLoaders: 1,
+              camelCase: true,
             }),
           },
           // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
@@ -103,6 +105,7 @@ module.exports = merge(config, {
             use: getStyleLoaders({
               importLoaders: 1,
               modules: true,
+              camelCase: true,
               getLocalIdent: getCSSModuleLocalIdent,
             }),
           },

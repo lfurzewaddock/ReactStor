@@ -19,3 +19,13 @@ dist
 
 # temporary files
 *.tmp
+
+# private environment variables
+*.env
+app-config.js
+
+# private notes
+notes/*
+
+# local dev server
+src/devHost/*
