@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import Routes from "./routes";
-
 import "sanitize.css";
 import "./index.css";
+
+import Routes from "./routes";
 
 const routes = <Routes />;
 
