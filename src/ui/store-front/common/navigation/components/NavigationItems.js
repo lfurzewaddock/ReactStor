@@ -1,21 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withAuth } from "@okta/okta-react";
+import { connect } from "react-redux";
 
 import styles from "./navigation-items.module.css";
 
 import NavLinkItem from "./NavLinkItem";
 import NavButtonItem from "./NavButtonItem";
-// import Authentication from "../containers/Authentication";
+
+import * as actionsLogin from "../../../modules/users/actions/login";
 
 const navigationItems = (props) => {
-  const { isAuthenticated, auth, sidebarNavigationHideClickEvent } = props;
+  const {
+    isAuthenticated, auth, sidebarNavigationHideClickEvent, logoutApiCall,
+  } = props;
   // TODO: Testing - REMOVE
   console.log("navigationItems: isAuthenticated ", isAuthenticated); /* eslint-disable-line no-console */
   const authNav = isAuthenticated ? (
     <>
       <NavButtonItem onClick={() => {
-        auth.logout();
+        logoutApiCall(auth);
         sidebarNavigationHideClickEvent();
       }}
       >
@@ -38,8 +42,18 @@ const navigationItems = (props) => {
   );
 };
 
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.authenticated,
+});
+
+const mapDispatchToProps = dispatch => ({
+  logoutApiCall: (auth) => {
+    dispatch(actionsLogin.logoutApiCall(auth));
+  },
+});
+
 navigationItems.propTypes = {
-  isAuthenticated: PropTypes.bool,
+  isAuthenticated: PropTypes.bool.isRequired,
   sidebarNavigationHideClickEvent: PropTypes.func,
   auth: PropTypes.shape({
     getAccessToken: PropTypes.func,
@@ -51,11 +65,14 @@ navigationItems.propTypes = {
     logout: PropTypes.func,
     redirect: PropTypes.func,
   }).isRequired,
+  logoutApiCall: PropTypes.func.isRequired,
 };
 
 navigationItems.defaultProps = {
-  isAuthenticated: false,
   sidebarNavigationHideClickEvent: () => {},
 };
 
-export default withAuth(navigationItems);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withAuth(navigationItems));

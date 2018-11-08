@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
 
 import styles from "./layout.module.css";
 
@@ -21,7 +22,7 @@ class Layout extends Component {
   }
 
   render() {
-    const { children } = this.props;
+    const { children, location } = this.props;
     const { isDisplaySidebarNavigation } = this.state;
     return (
       <>
@@ -29,6 +30,7 @@ class Layout extends Component {
           isDisplaySidebarNavigation={isDisplaySidebarNavigation}
           sidebarNavigationToggleClickEvent={this.sidebarNavigationToggleHandler}
           sidebarNavigationHideClickEvent={this.sidebarNavigationHideHandler}
+          location={location}
         />
         <main className={styles.Content}>
           {children}
@@ -40,6 +42,12 @@ class Layout extends Component {
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  location: PropTypes.shape({
+    hash: PropTypes.string,
+    key: PropTypes.string,
+    pathname: PropTypes.string,
+    search: PropTypes.string,
+  }).isRequired,
 };
 
-export default Layout;
+export default withRouter(Layout);

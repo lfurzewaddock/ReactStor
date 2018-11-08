@@ -2,50 +2,34 @@ import React, { Component } from "react";
 import OktaAuth from "@okta/okta-auth-js";
 import { withAuth } from "@okta/okta-react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
+import * as actionsLogin from "../../../modules/users/actions/login";
 
 class LoginForm extends Component {
   state = {
-    sessionToken: null,
-    error: null,
     username: "",
     password: "",
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
+    window.parent.postMessage("submitted form", "*");
     const { username, password } = this.state;
-    const { baseUrl } = this.props;
+    const { baseUrl, loginApiCall } = this.props;
     const oktaAuth = new OktaAuth({ url: baseUrl });
-    oktaAuth
-      .signIn({
-        username,
-        password,
-      })
-      .then((res) => {
-        // TODO: Testing - REMOVE
-        // // eslint-disable-next-line no-debugger
-        // debugger;
-        this.setState({ sessionToken: res.sessionToken });
-      })
-      .catch((err) => {
-        this.setState({ error: err.message });
-        /* TODO: Replace with debug lib */
-        console.log(`${err.statusCode} error`, err); /* eslint-disable-line no-console */
-      });
+    loginApiCall(oktaAuth, username, password);
   }
 
   handleInputChange = field => e => this.setState({ [field]: e.target.value });
 
   render() {
     const {
-      username, password, sessionToken, error,
+      username, password,
     } = this.state;
-    const { auth } = this.props;
+    const { auth, sessionToken, error } = this.props;
 
     if (sessionToken) {
-      // TODO: Testing - REMOVE
-      // // eslint-disable-next-line no-debugger
-      // debugger;
       auth.redirect({ sessionToken });
       return null;
     }
@@ -81,6 +65,17 @@ class LoginForm extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  sessionToken: state.login.sessionToken,
+  error: state.login.error,
+});
+
+const mapDispatchToProps = dispatch => ({
+  loginApiCall: (oktaAuth, username, password) => {
+    dispatch(actionsLogin.loginApiCall(oktaAuth, username, password));
+  },
+});
+
 LoginForm.propTypes = {
   baseUrl: PropTypes.string.isRequired,
   auth: PropTypes.shape({
@@ -93,6 +88,10 @@ LoginForm.propTypes = {
     logout: PropTypes.func,
     redirect: PropTypes.func,
   }).isRequired,
+  sessionToken: PropTypes.string.isRequired,
+  error: PropTypes.string.isRequired,
+  loginApiCall: PropTypes.func.isRequired,
 };
 
-export default withAuth(LoginForm);
+
+export default connect(mapStateToProps, mapDispatchToProps)(withAuth(LoginForm));

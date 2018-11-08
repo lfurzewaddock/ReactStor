@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import { withAuth } from "@okta/okta-react";
+import { connect } from "react-redux";
 
 import LoginForm from "./LoginForm";
 
-class Login extends Component {
-  state = { authenticated: null };
+import * as actionsAuth from "../../../modules/users/actions/auth";
 
+class Login extends Component {
   componentDidMount() {
     this.checkAuthentication();
   }
@@ -16,19 +17,13 @@ class Login extends Component {
     this.checkAuthentication();
   }
 
-  // TODO: DRY move to module
-  checkAuthentication = async () => {
-    const { auth } = this.props;
-    const { authenticated } = this.state;
-    const isAuthenticated = await auth.isAuthenticated();
-    if (isAuthenticated !== authenticated) {
-      this.setState({ authenticated: isAuthenticated });
-    }
+  checkAuthentication = () => {
+    const { auth, isAuthApiCall } = this.props;
+    isAuthApiCall(auth);
   }
 
   render() {
-    const { authenticated } = this.state;
-    const { baseUrl } = this.props;
+    const { baseUrl, authenticated } = this.props;
     if (authenticated === null) return null;
     return authenticated
       ? <Redirect to={{ pathname: "/profile" }} />
@@ -36,8 +31,31 @@ class Login extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  authenticated: state.auth.authenticated,
+});
+
+const mapDispatchToProps = dispatch => ({
+  isAuthApiCall: (auth) => {
+    dispatch(actionsAuth.isAuthApiCall(auth));
+  },
+});
+
 Login.propTypes = {
+  auth: PropTypes.shape({
+    getAccessToken: PropTypes.func,
+    getIdToken: PropTypes.func,
+    getUser: PropTypes.func,
+    handleAuthentication: PropTypes.func,
+    isAuthenticated: PropTypes.func,
+    login: PropTypes.func,
+    logout: PropTypes.func,
+    redirect: PropTypes.func,
+  }).isRequired,
   baseUrl: PropTypes.string.isRequired,
+  authenticated: PropTypes.bool.isRequired,
+  isAuthApiCall: PropTypes.func.isRequired,
 };
 
-export default withAuth(Login);
+
+export default connect(mapStateToProps, mapDispatchToProps)(withAuth(Login));

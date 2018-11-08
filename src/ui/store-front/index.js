@@ -1,11 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { createStore, applyMiddleware, compose } from "redux";
+import { Provider } from "react-redux";
+import logger from "redux-logger";
+import thunk from "redux-thunk";
 
 import "sanitize.css";
 import "./index.css";
 
 import Routes from "./routes";
+import reducers from "./modules/reducers";
 
-const routes = <Routes />;
+/* eslint-disable no-underscore-dangle */
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+/* eslint-enable */
+const store = createStore(
+  reducers, composeEnhancers(applyMiddleware(logger, thunk)),
+);
 
-ReactDOM.render(routes, document.getElementById("root") || document.createElement("div"));
+ReactDOM.render(
+  <Provider store={store}>
+    <Routes />
+  </Provider>,
+  document.getElementById("root") || document.createElement("div"),
+);
