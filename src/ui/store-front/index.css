@@ -1,14 +1,11 @@
 /* Extra small devices (portrait phones, less than 576px) */
 /* No media query for `xs` since this is the default in Bootstrap */
 body {
-  margin: 0;
+  /* margin: 0;
   padding: 0;
   font-family: "Open Sans", sans-serif;
-  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif; */
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale; */
 }
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {}

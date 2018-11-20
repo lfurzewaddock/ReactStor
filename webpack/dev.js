@@ -133,10 +133,106 @@ module.exports = merge(config, {
             ),
           },
           // END Source: Create React App
+          // Loader configurations for semantic-ui-less
+          {
+            // Load .less files from semantic-ui-less module folder
+            test: vars.lessRegex,
+            include: vars.lessSemanticUi,
+            use: [
+              require.resolve("style-loader"),
+              {
+              // Set importLoaders to 2, because there are two more loaders in the chain
+              // (postcss-loader and semantic-ui-less-module-loader),
+              // which shall be used when loading @import resources in CSS files:
+                loader: require.resolve("css-loader"),
+                options: {
+                  importLoaders: 2,
+                  sourceMap: true,
+                  minimize: true,
+                },
+              },
+              {
+                // Options for PostCSS as we reference these options twice
+                // Adds vendor prefixing based on your specified browser support in
+                // package.json
+                loader: require.resolve("postcss-loader"),
+                options: {
+                  // Necessary for external CSS imports to work
+                  // https://github.com/facebook/create-react-app/issues/2677
+                  ident: "postcss",
+                  plugins: () => [
+                    require("postcss-flexbugs-fixes"), /* eslint-disable-line global-require */
+                    require("postcss-preset-env")({ /* eslint-disable-line global-require */
+                      autoprefixer: {
+                        flexbox: "no-2009",
+                      },
+                      stage: 3,
+                    }),
+                  ],
+                },
+              },
+              {
+                loader: "semantic-ui-less-module-loader",
+                options: {
+                  siteFolder: path.resolve(__dirname, "../src/assets/styles/semantic-ui-theme/site"),
+                  themeConfigPath: path.resolve(__dirname, "../src/assets/styles/semantic-ui-theme/theme.config"),
+                },
+              },
+            ],
+          },
+          // Opt-in support for LESS (using .less extension).
+          // Chains the less-loader with the css-loader and the style-loader
+          // to immediately apply all styles to the DOM.
+          // By default we support LESS Modules with the
+          // extensions .module.less
+          {
+            test: vars.lessRegex,
+            exclude: [vars.lessModuleRegex, vars.lessSemanticUi],
+            use: getStyleLoaders({ importLoaders: 2 }, "less-loader"),
+          },
+          // Adds support for CSS Modules, but using LESS
+          // using the extension .module.less
+          {
+            test: vars.lessModuleRegex,
+            use: getStyleLoaders(
+              {
+                importLoaders: 2,
+                modules: true,
+                getLocalIdent: getCSSModuleLocalIdent,
+              },
+              "less-loader",
+            ),
+          },
+          // "file" loader makes sure those assets get served by WebpackDevServer.
+          // When you `import` an asset, you get its (virtual) filename.
+          // In production, they would get copied to the `build` folder.
+          // This loader doesn't use a "test" so it will catch all modules
+          // that fall through the other loaders.
+          {
+            loader: require.resolve("file-loader"),
+            // Exclude `js` files to keep "css" loader working as it injects
+            // its runtime that would otherwise be processed through "file" loader.
+            // Also exclude `html` and `json` extensions so they get processed
+            // by webpacks internal loaders.
+            // Custom - Support semantic-ui-less exclude files (.config. .overrides .variables)
+            // Custom - Support HtmlWebpackTemplate exclude files (.ejs) ??? TODO confirm
+            exclude: [
+              /\.(js|mjs|jsx|ts|tsx)$/,
+              /\.html$/,
+              /\.json$/,
+              /\.config$/,
+              /\.overrides$/,
+              /\.variables$/,
+              /\.ejs$/,
+            ],
+            options: {
+              name: "static/media/[name].[hash:8].[ext]",
+            },
+          },
+          // ** STOP ** Are you adding a new loader?
+          // Make sure to add the new loader(s) before the "file" loader.
         ],
       },
-    // ** STOP ** Are you adding a new loader?
-    // Make sure to add the new loader(s) before the "file" loader.
     ],
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],

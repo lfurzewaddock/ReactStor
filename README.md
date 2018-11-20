@@ -7,7 +7,13 @@ Work in progress...
 ## Features: 
 
 - Core navigation UI (responsive)
+  - Burger icon for smaller screens to hide/show vertical side bar menu.
+  - Horizontal navigation menu bar for larger screens.
 - Okta OIDC (implicit flow) client integration
+  - Login
+  - Logout
+  - Register
+  - Profile (very basic)
 
 ## Commands
 
@@ -34,6 +40,18 @@ Work in progress...
 ## Log
 
 - Download/install [js-tdd-kit](https://github.com/lfurzewaddock/js-tdd-kit)
+- UI/layout theme/design [Semantic UI React](https://react.semantic-ui.com/)
+  - `semantic-ui-less` package required to generate CSS from Less source
+  - Note: encountered several issues using `semantic-ui-less` which required manual workarounds;
+    - Required modifications to `semantic-ui-less` font URLs where present required - see: [Request: please add 'css' Less 'Import Option' to font imports #55](https://github.com/Semantic-Org/Semantic-UI-LESS/issues/55)
+      - e.g. `@import url(https://fonts.googleapis.com/css?family=Roboto);` to `@import (css) url(https://fonts.googleapis.com/css?family=Roboto);`
+    - Modifications to `semantic-ui-less` directories required, i.e.; 
+      - `semantic-ui-less/themes/material/elements/icon.variables` from `@fontPath  : '../../themes/material/assets/fonts';` to `@fontPath  : '../../material/assets/fonts';`
+      - `semantic-ui-less/themes/basic/elements/icon.variables` from `@fontPath  : "../../themes/basic/assets/fonts";` to `@fontPath  : "../../basic/assets/fonts";`
+      - `semantic-ui-less/themes/themes/github/elements/icon.variables` from `@fontPath: '../../themes/github/assets/fonts';` to `@fontPath: '../../github/assets/fonts';`
+    - Missing Github and Material icon font formats required download to relevant directories.
+  - `semantic-ui-less-module-loader` required for Webpack to transpile Less from `semantic-ui-less` -> CSS
+  - `babel-plugin-semantic-ui-react-transform-imports` adds imports for relevant Less source files from `semantic-ui-less` required to support components imported from `semantic-ui-react`. Important: This will only import direct Less dependencies, e.g. to support icons in form fields it was necessary to import the Icon component from `semantic-ui-react` just to acquire the relevant supporting Less files, required by form fields indirectly to support icons.
 
 
 ## Conventions
@@ -45,6 +63,7 @@ Work in progress...
 ## Assets
 
 - [Dynamic Dummy Image Generator](https://dummyimage.com/300x300/fff/aaa)
+- [Acme logos](http://acmelogos.com/)
 
 ## Services
 

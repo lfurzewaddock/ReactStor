@@ -10,4 +10,7 @@ module.exports = {
   sassRegex: /\.(scss|sass)$/,
   sassModuleRegex: /\.module\.(scss|sass)$/,
   // END Source: Create React App
+  lessRegex: /\.less$/,
+  lessModuleRegex: /\.module\.less$/,
+  lessSemanticUi: /[/\\]node_modules[/\\]semantic-ui-less[/\\]/,
 };
