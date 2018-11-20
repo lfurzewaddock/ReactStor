@@ -30,3 +30,6 @@ notes/*
 
 # local dev server
 src/devHost/*
+
+# store-api alternative (WIP)
+src/store-api/*
