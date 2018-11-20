@@ -7,6 +7,7 @@ import Categories from "../../categories";
 import Login from "../../login";
 import Register from "../../register";
 import Profile from "../../profile";
+import Checkout from "../../checkout";
 import ImplicitCallback from "../../implicit/callback";
 
 import config from "../../../app-config";
@@ -23,6 +24,7 @@ const routes = (
     <ImplicitCallback />
     <Register />
     <Profile />
+    <Checkout />
     <Categories />
     <Home />
   </>

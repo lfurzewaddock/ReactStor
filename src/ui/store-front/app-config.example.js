@@ -10,4 +10,7 @@ export default {
   api: {
     baseUrl: "http://localhost:3000",
   },
+  paymentGateway: {
+    apiKey: "pk_test_yourStripePublishableKey",
+  },
 };

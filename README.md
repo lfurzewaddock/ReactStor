@@ -14,6 +14,8 @@ Work in progress...
   - Logout
   - Register
   - Profile (very basic)
+- Stripe (payments) integration
+  - minimal implementation using React Stripe Elements
 
 ## Commands
 
@@ -68,3 +70,4 @@ Work in progress...
 ## Services
 
 - [Okta Developer](https://developer.okta.com/code/react/)
+- [Stripe Docs](https://stripe.com/docs)
