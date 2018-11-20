@@ -12,8 +12,7 @@ export const isAuthStatusError = error => ({
 
 export const isAuthApiCall = auth => dispatch => auth.isAuthenticated()
   .then((res) => {
-    // // eslint-disable-next-line no-debugger
-    // debugger;
+    // debugger; /* eslint-disable-line no-debugger */
     // console.log(JSON.stringify(res)); /* eslint-disable-line no-console */
     dispatch(isAuthStatus(res));
   }).catch((err) => {

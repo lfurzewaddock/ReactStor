@@ -9,6 +9,8 @@ router.post('/', (req, res, next) => {
     profile: {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
+      postalAddress: req.body.postalAddress,
+      billingAddress: req.body.billingAddress,
       email: req.body.email,
       login: req.body.email
     },
