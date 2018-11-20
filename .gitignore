@@ -16,6 +16,7 @@ dist
 
 # old/redundant files waiting to be deleted
 *.ARCHIVE.*
+*.ARCHIVE/
 
 # temporary files
 *.tmp
