@@ -101,7 +101,7 @@ class RegistrationForm extends Component {
       isFormValid: false,
       formErrors: [],
       formErrorFeedback: "",
-      error: null,
+      // error: null,
     };
     this.oktaAuth = new OktaAuth({
       url: config.oidcIdp.url,
@@ -289,8 +289,11 @@ class RegistrationForm extends Component {
   }
 
   render() {
+    // const {
+    //   formCtrls, isFormValid, formErrorFeedback, error,
+    // } = this.state;
     const {
-      formCtrls, isFormValid, formErrorFeedback, error,
+      formCtrls, isFormValid, formErrorFeedback,
     } = this.state;
     const {
       registerErrorMsg, loginErrorMsg, registerIsPending, loginIsPending,
@@ -320,11 +323,13 @@ class RegistrationForm extends Component {
         key="errorFormClient"
       />
     ) : null;
-    const errorMessage = error ? (
-      <span className="error-message">{error}</span>
-    ) : null;
+    // const errorMessage = error ? (
+    //   <span className="error-message">{error}</span>
+    // ) : null;
 
-    const formMarkup = !registerIsPending || !loginIsPending
+    const isLoading = registerIsPending || loginIsPending;
+
+    const formMarkup = !isLoading
       ? (
         <div className={styles.registrationForm} key="loginFormMarkup">
           <Grid textAlign="center" style={{ height: "100%" }} verticalAlign="middle">
@@ -405,14 +410,14 @@ class RegistrationForm extends Component {
                   </Button>
                 </Segment>
               </Form>
-              { errorMessage }
+              {/* { errorMessage } */}
               { clientErrorMessage }
               { serverRegisterErrorMessage }
               { serverLoginErrorMessage }
             </Grid.Column>
           </Grid>
         </div>
-      ) : <Loader isLoading={loginIsPending} key="loginFormLoader" />;
+      ) : <Loader isLoading={isLoading} key="loginFormLoader" />;
 
     return [formMarkup];
   }
