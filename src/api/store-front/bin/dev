@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+import Debug from "debug";
+import app from "../src/app";
+
+const debug = Debug("reactstor:store-api:bin");
+
+debug("attempting to start app (development)");
+// Start Fastify app
+(async function www(port) {
+  debug("attempting to start app");
+  try {
+    const instance = await app(port);
+    debug(`App running on protocol version: ${instance.server.address().family}`);
+    debug(`App running at IP: ${instance.server.address().address}`);
+    debug(`App running on port: ${instance.server.address().port}`);
+  } catch (error) {
+    debug(`App crashed with error: ${error}`);
+  }
+}());

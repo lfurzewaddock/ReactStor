@@ -18,7 +18,7 @@ export const registerSuccess = data => ({
 
 export const registerInit = () => dispatch => dispatch(register());
 
-export const registerApiCall = (oktaAuth, data) => dispatch => storeApi.post("/api/users", data, {
+export const registerApiCall = (oktaAuth, data) => dispatch => storeApi.post("/api/v1/users", data, {
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

@@ -8,6 +8,9 @@ coverage
 # Webpack compiled bundle directory
 dist
 
+# Babel output directory
+lib
+
 # MS VS Code editor config/options
 # .vscode
 
@@ -30,6 +33,3 @@ notes/*
 
 # local dev server
 src/devHost/*
-
-# store-api alternative (WIP)
-src/store-api/*

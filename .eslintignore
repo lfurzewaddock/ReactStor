@@ -1,6 +1,9 @@
 # Webpack compiled bundle directory
 dist/*
 
+# Babel output directory
+lib
+
 # Node Modules
 node_modules/*
 
