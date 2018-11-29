@@ -8,7 +8,7 @@ debug("define DB calls (products)");
 // eslint-disable-next-line import/prefer-default-export
 export async function getOneById(id) {
   debug("executing SQL query (getOneById)");
-  const { text, values } = sql.compile(sql`select name, code from product where id = ${sql.value(id)}`);
+  const { text, values } = sql.compile(sql`select id, name, code from product where id = ${sql.value(id)}`);
   debug(`SQL query: ${JSON.stringify(text)}`);
   debug(`SQL value(s): ${JSON.stringify(values)}`);
   try {

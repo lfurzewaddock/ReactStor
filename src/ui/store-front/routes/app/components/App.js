@@ -3,11 +3,12 @@ import { Security } from "@okta/okta-react";
 
 import Layout from "../../../common/layout/containers/Layout";
 import Home from "../../home";
-import Categories from "../../categories";
+import Category from "../../category";
 import Login from "../../login";
 import Register from "../../register";
 import Profile from "../../profile";
 import Checkout from "../../checkout";
+import Product from "../../product";
 import ImplicitCallback from "../../implicit/callback";
 
 import config from "../../../app-config";
@@ -25,7 +26,8 @@ const routes = (
     <Register />
     <Profile />
     <Checkout />
-    <Categories />
+    <Category />
+    <Product />
     <Home />
   </>
 );

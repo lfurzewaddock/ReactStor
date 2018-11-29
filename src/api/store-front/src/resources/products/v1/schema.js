@@ -3,10 +3,14 @@ const products = {
   items: {
     type: "object",
     required: [
+      "id",
       "name",
       "code",
     ],
     properties: {
+      id: {
+        type: "string",
+      },
       name: {
         type: "string",
       },
