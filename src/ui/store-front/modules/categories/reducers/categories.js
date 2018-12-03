@@ -6,17 +6,17 @@ const initialState = {
   data: [],
 };
 
-const products = (state = initialState, action) => {
+const categories = (state = initialState, action) => {
   switch (action.type) {
-    case constants.PRODUCT_RETRIEVE_DATA_BEGIN:
+    case constants.CATEGORY_RETRIEVE_DATA_BEGIN:
       return Object.assign({}, state, { isPending: true });
-    case constants.PRODUCT_RETRIEVE_DATA_FAILURE:
+    case constants.CATEGORY_RETRIEVE_DATA_FAILURE:
       return Object.assign({}, state, { isPending: false, errorMsg: action.payload });
-    case constants.PRODUCT_RETRIEVE_DATA_SUCCESS:
+    case constants.CATEGORY_RETRIEVE_DATA_SUCCESS:
       return Object.assign({}, state, { isPending: false, errorMsg: "", data: action.payload });
     default:
       return state;
   }
 };
 
-export default products;
+export default categories;

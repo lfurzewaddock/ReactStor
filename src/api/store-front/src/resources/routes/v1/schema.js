@@ -1,32 +1,29 @@
-const categories = {
+const routes = {
   type: "array",
   items: {
     type: "object",
     required: [
       "id",
-      "nlevel",
-      "path",
+      "runtime",
+      "subject",
     ],
     properties: {
       id: {
         type: "integer",
       },
-      nlevel: {
-        type: "integer",
+      runtime: {
+        type: "boolean",
       },
-      path: {
+      subject: {
         type: "string",
       },
-      heading: {
-        type: "string",
-      },
-      body: {
-        type: "string",
+      matter: {
+        type: ["object", "null"],
       },
     },
   },
 };
 
 export default {
-  categories,
+  routes,
 };

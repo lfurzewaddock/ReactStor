@@ -20,6 +20,32 @@ export async function getOneById(request) {
   return data.rows; // note we return the promise without using '.send()'
 }
 
+export async function getManyByRouteId(request) {
+  const { id = 0 } = request.params;
+  let data = {};
+  try {
+    data = await database.getOneByRouteId(id);
+  } catch (e) {
+    debug(`getOneByRouteId ctrl error: ${e}`);
+    return e;
+  }
+
+  const { nlevel, path } = data.rows[0];
+  try {
+    data = await database.getManyFilterByLevelAndAncestors(
+      nlevel + 1, prepareAncestorsPath(path),
+    );
+  } catch (e) {
+    debug(`getManyByLevelAndAncestors ctrl error: ${e}`);
+    return e;
+  }
+
+  // Note: Fastify will only set status code to 204 (no content),
+  // if payload is missing/empty, but not for an empty array: (zero results).
+  debug(`return ${data.rows.length} row(s)`);
+  return data.rows; // note we return the promise without using '.send()'
+}
+
 export async function getManyFilterByLevelAndAncestors(request) {
   let data = {};
   if (!isEmpty(request.query)) {

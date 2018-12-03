@@ -38,5 +38,20 @@ export default function moduleExportsDefault(fastify, options, next) {
     handler: controller.getOneById,
   });
 
+  // e.g. http://localhost:3000/api/v1/category-routes/1
+  fastify.route({
+    method: "GET",
+    url: "/category-routes/:id",
+    schema: {
+      params: {
+        id: { type: "integer" },
+      },
+      response: {
+        200: schema.categories,
+      },
+    },
+    handler: controller.getManyByRouteId,
+  });
+
   next(); // pass control to the next plugin/route
 }

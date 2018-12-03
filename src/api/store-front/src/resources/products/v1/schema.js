@@ -4,14 +4,14 @@ const products = {
     type: "object",
     required: [
       "id",
-      "name",
+      "title",
       "code",
     ],
     properties: {
       id: {
-        type: "string",
+        type: "integer",
       },
-      name: {
+      title: {
         type: "string",
       },
       code: {
@@ -20,7 +20,6 @@ const products = {
     },
   },
 };
-
 
 export default {
   products,

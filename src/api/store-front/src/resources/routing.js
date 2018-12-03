@@ -3,6 +3,7 @@ import users from "./users/v1/routing";
 import categories from "./categories/v1/routing";
 import products from "./products/v1/routing";
 import payments from "./payments/v1/routing";
+import routes from "./routes/v1/routing";
 import healthcheck from "./healthcheck.routing";
 
 const debug = Debug("reactstor:store-api:resources");
@@ -28,6 +29,10 @@ export default function () {
     {
       prefix: "/v1",
       routes: payments,
+    },
+    {
+      prefix: "/v1",
+      routes,
     },
   ];
 }
