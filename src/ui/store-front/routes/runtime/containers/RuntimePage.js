@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
+import Loader from "../../../common/ui/components/Loader";
 import NotFound from "../components/NotFound";
 import CategoryPage from "./CategoryPage";
 import ProductPage from "./ProductPage";
@@ -13,18 +14,18 @@ import * as actionsRoutes from "../../../modules/routes/actions/routes";
 
 class RuntimePage extends Component {
   componentDidMount = () => {
-    const { match, routesDataApiCall } = this.props;
+    const { match, routesDataInit, routesDataApiCall } = this.props;
     const { runtime } = match.params;
+    routesDataInit();
     routesDataApiCall(runtime);
   }
 
   render() {
-    const { data } = this.props;
+    const { isPending, data } = this.props;
 
     if (Array.isArray(data) && data.length) {
       const { id, subject } = data[0];
 
-      // TODO - Handle loading
       if (subject === "product") {
         return <ProductPage routeId={id} />
       }
@@ -32,7 +33,7 @@ class RuntimePage extends Component {
         return <CategoryPage routeId={id} />
       }
     } else {
-      return <NotFound />
+      return isPending ? <Loader /> : <NotFound />
     }
   }
 }
@@ -61,13 +62,16 @@ RuntimePage.propTypes = {
     }),
   ).isRequired,
   routesDataApiCall: PropTypes.func.isRequired,
+  isPending: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
   data: state.routes.data,
+  isPending: state.routes.isPending,
 });
 
 const mapDispatchToProps = dispatch => ({
+  routesDataInit: () => dispatch(actionsRoutes.routesDataInit()),
   routesDataApiCall: (slug) => {
     dispatch(actionsRoutes.routesDataApiCall(slug));
   },
