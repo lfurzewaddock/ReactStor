@@ -1,5 +1,6 @@
 import React from "react";
 import { Security } from "@okta/okta-react";
+import { Switch } from "react-router-dom";
 
 import Layout from "../../../common/layout/containers/Layout";
 import Home from "../../home";
@@ -10,6 +11,7 @@ import Profile from "../../profile";
 import Checkout from "../../checkout";
 import Product from "../../product";
 import ImplicitCallback from "../../implicit/callback";
+import Runtime from "../../runtime";
 
 import config from "../../../app-config";
 
@@ -20,16 +22,18 @@ function onAuthRequired({ history }) {
 }
 
 const routes = (
-  <>
-    <Login />
-    <ImplicitCallback />
-    <Register />
-    <Profile />
-    <Checkout />
-    <Category />
-    <Product />
-    <Home />
-  </>
+  <Switch>
+    <Login path="/login" />
+    <Register path="/register" />
+    <Profile path="/profile" />
+    <Checkout path="/checkout" />
+    <Category path="/category/:id" />
+    <Category path="/category" />
+    <Product path="/product/:id" />
+    <ImplicitCallback path="/implicit/callback" />
+    <Runtime path="/:runtime" />
+    <Home path="/" />
+  </Switch>
 );
 
 const app = () => (
