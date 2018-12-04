@@ -260,7 +260,7 @@ class LoginForm extends Component {
                     onChange={this.handleInputChange("password")}
                     onBlur={formCtrls.password.isValid ? null : this.handleInputBlur("password")}
                   />
-                  <Button fluid type="submit" size="large" disabled={!isFormValid}>
+                  <Button fluid type="submit" size="large" primary disabled={!isFormValid}>
                     Login
                   </Button>
                 </Segment>
